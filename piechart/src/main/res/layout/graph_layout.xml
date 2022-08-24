@@ -9,7 +9,7 @@
     android:padding="10dp"
     android:layout_gravity="center">
 
-    <com.sunilsahoo.piechart.GraphView
+    <com.sunilsahoo.android.piechart.GraphView
         android:layout_width="210dp"
         android:layout_height="210dp"
         android:id="@+id/graph"

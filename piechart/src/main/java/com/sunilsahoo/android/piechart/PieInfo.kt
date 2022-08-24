@@ -1,4 +1,4 @@
-package com.sunilsahoo.piechart
+package com.sunilsahoo.android.piechart
 
 class PieInfo {
     var text: CharSequence?=null

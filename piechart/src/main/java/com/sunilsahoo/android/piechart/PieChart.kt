@@ -1,4 +1,4 @@
-package com.sunilsahoo.piechart
+package com.sunilsahoo.android.piechart
 
 import android.content.Context
 import android.util.AttributeSet

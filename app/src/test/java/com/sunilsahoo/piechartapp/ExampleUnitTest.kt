@@ -1,4 +1,4 @@
-package com.sunilsahoo.piechartapp
+package com.sunilsahoo.android.piechartapp
 
 import org.junit.Test
 

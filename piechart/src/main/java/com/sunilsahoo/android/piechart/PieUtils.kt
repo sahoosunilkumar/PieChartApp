@@ -1,4 +1,4 @@
-package com.sunilsahoo.piechart
+package com.sunilsahoo.android.piechart
 
 import android.graphics.Color
 import java.util.*
