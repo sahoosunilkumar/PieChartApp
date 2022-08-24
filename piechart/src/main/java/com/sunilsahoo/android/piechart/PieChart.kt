@@ -1,6 +1,7 @@
 package com.sunilsahoo.android.piechart
 
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
@@ -11,7 +12,8 @@ class PieChart : FrameLayout {
     private lateinit var graphInfoLayout: LinearLayout
     private lateinit var graphView: GraphView
     private lateinit var graphInfoText: TextView
-        constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(
+
+    constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(
         context!!, attrs, defStyle
     ) {
         initView()
@@ -35,21 +37,37 @@ class PieChart : FrameLayout {
         this.visibility = GONE
     }
 
-    fun updateInfo(pieInfo: PieInfo){
-        if (pieInfo.segments?.isEmpty() == false){
+    fun updateInfo(pieInfo: PieInfo) {
+        if (pieInfo.segments?.isEmpty() == false) {
             this.visibility = VISIBLE
             graphInfoLayout.removeAllViews()
             graphView.update(pieInfo)
-            pieInfo.text?.let { graphInfoText.text = it }
+            pieInfo.text?.let {
+                pieInfo.pieChartTitleTextStyle?.let {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        graphInfoText.setTextAppearance(it)
+                    } else {
+                        graphInfoText.setTextAppearance(context, it)
+                    }
+                }
+                graphInfoText.text = it
+            }
             pieInfo.segments?.forEach {
                 val child = inflate(context, R.layout.graph_info_item, null)
-                val view:View = child.findViewById(R.id.graph_hint_view)
+                val view: View = child.findViewById(R.id.graph_hint_view)
                 view.setBackgroundColor(it.color)
                 val text = child.findViewById<TextView>(R.id.graph_hint)
+                pieInfo.pieChartSegmentTextStyle?.let {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        text.setTextAppearance(it)
+                    } else {
+                        text.setTextAppearance(context, it)
+                    }
+                }
                 text.text = it.text
                 graphInfoLayout.addView(child)
             }
-        }else{
+        } else {
             this.visibility = GONE
         }
 
